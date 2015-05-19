@@ -13,8 +13,8 @@ function update_lcd()
   local stats = p:stats()
   local Speed_max_= round(stats.speed_max)
   
-  --local pipe = io.open("/tmp/g15naev", "w")
-  --create screen
+  local pipe = io.open("/tmp/g15naev", "w")
+  create screen
   local screen = "MC 1\n" .. 
   "TO 0 0 1 0 \"Shield " .. Shield_ .. "%" .. " \" \n" ..
   "DB 59 1 128 4 1 " .. Shield_ .. " 100" .. " \" \n" ..
@@ -30,8 +30,8 @@ function update_lcd()
   "TO 130 24 1 0 \"(" .. Speed_max_  .. ")" .. " \" \n" ..
   "MC 0 \n"
   --write screen
- -- pipe:write(screen)
- -- pipe:close()
+  pipe:write(screen)
+  pipe:close()
   hook.timer(250,"timer")
 end
 
@@ -41,7 +41,7 @@ function timer()
     update_lcd()    
     tick = naev.ticks()
   else 
-      hook.timer(200,"timer")
+      hook.timer(250,"timer")
   end
 end
 
